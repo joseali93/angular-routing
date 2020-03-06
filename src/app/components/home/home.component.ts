@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   doctors;
-
+  model
   constructor(private homeservice:ConsultService) { }
 
   ngOnInit() {

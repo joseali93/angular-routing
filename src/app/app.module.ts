@@ -15,6 +15,7 @@ import { environment } from "src/environments/environment";
 //angularfire imports
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     NgbModule,    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule
   ],

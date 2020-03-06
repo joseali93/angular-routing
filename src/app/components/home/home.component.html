@@ -1,11 +1,20 @@
 <h1>Agendar cita medica</h1>
 <div class="input-group mb-3">
     <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">@</span>
+      <label class="input-group-text" for="inputGroupSelect01">Doctores</label>
     </div>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-        aria-describedby="basic-addon1">
-</div>
-<div *ngFor="let item of doctors">
-    {{item}}
-</div>
+    <select class="custom-select" id="inputGroupSelect01">
+      <option selected>Choose...</option>
+      <option *ngFor="let item of doctors" >{{item.name}}</option>
+    
+    </select>
+  </div>
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
