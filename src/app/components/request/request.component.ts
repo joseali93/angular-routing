@@ -9,6 +9,7 @@ pdfMakeConfig.vfs = pdfFonts.pdfMake.vfs;
 
 // import core lib
 import * as pdfMake from 'pdfmake/build/pdfmake';
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
@@ -82,12 +83,25 @@ export class RequestComponent implements OnInit {
       .then((data: any) => {
         console.log('data', data);
         this.doctors = data
-        var x = Math.floor((Math.random() * this.doctors.length) + 1);
-        console.log(x);
-        this.generatePdf(x)
-        this.toastr.success(`el nombre del medico asignado es el siguiente : ${this.doctors[0].name}  ${this.doctors[0].last}`, 'Medico asignado');
-
+        if(this.requestForm.status==='VALID'){
+          var x = Math.floor((Math.random() * this.doctors.length));
+          console.log(x);
+          this.generatePdf(x)
+          this.toastr.success(`el nombre del medico asignado es el siguiente : ${this.doctors[x].name}  ${this.doctors[x].last}`, 'Medico asignado');
+          this.setInformation(this.doctors[x])
+        } else {
+          this.toastr.warning('completa la informacion')
+        }
+  
       })
+  }
+  setInformation(doctor){
+    var obj ={
+      user: this.requestForm.value,
+      doctor:doctor
+    }
+    this.homeservice.setDomicilio(obj)
+
   }
   generatePdf(index) {
 

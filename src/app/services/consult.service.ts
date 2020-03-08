@@ -64,8 +64,26 @@ export class ConsultService {
       });;
 
   }
-  setCita(data) {
+  setCita(data,collecion='citas') {
     return this.firestore.collection("citas").add(data)
+      .then(function (docRef) {
+        return console.log("Document successfully written!",docRef);
+      })
+      .catch(function (error) {
+        return console.error("Error writing document: ", error);
+      });
+  }
+  setDomicilio(data) {
+    return this.firestore.collection("domicilio").add(data)
+      .then(function (docRef) {
+        return console.log("Document successfully written!",docRef);
+      })
+      .catch(function (error) {
+        return console.error("Error writing document: ", error);
+      });
+  }
+  setCotizacion(data) {
+    return this.firestore.collection("cotizacion").add(data)
       .then(function (docRef) {
         return console.log("Document successfully written!",docRef);
       })

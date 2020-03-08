@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { ConsultService } from './../../services/consult.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -39,6 +40,8 @@ export class HomeComponent implements OnInit {
     primaryKey:'id'
   };
   constructor(private homeservice: ConsultService,
+    private toastr: ToastrService,
+
     public formBuilder: FormBuilder, ) {
     this.checkForm = this.formBuilder.group({
       categoria: ['', Validators.required],
@@ -118,7 +121,12 @@ export class HomeComponent implements OnInit {
         dia:this.checkForm.value.dia,
         horario:this.checkForm.value.horario
       }
-      this.homeservice.setCita(objFinal)
+      this.homeservice.setCita(objFinal).then(
+        response=>{
+          this.toastr.success('agendado correctamente')
+
+        }
+      )
     }
 
   }

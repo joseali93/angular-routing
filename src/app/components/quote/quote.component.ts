@@ -8,6 +8,7 @@ pdfMakeConfig.vfs = pdfFonts.pdfMake.vfs;
 
 // import core lib
 import * as pdfMake from 'pdfmake/build/pdfmake';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-quote',
   templateUrl: './quote.component.html',
@@ -32,6 +33,8 @@ export class QuoteComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private homeservice: ConsultService,
+    private toastr: ToastrService
+
   ) {
     this.quoteForm = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -79,6 +82,7 @@ export class QuoteComponent implements OnInit {
     
     if(this.quoteForm.status ==='VALID'){
       this.showCotizacion=true
+
       // var objFinal = {
       //   categoria:this.checkForm.value.categoria[0].name,
       //   doctor:this.checkForm.value.doctor[0].name + ' ' +this.checkForm.value.doctor[0].last,
@@ -87,18 +91,20 @@ export class QuoteComponent implements OnInit {
       //   horario:this.checkForm.value.horario
       // }
       // this.homeservice.setCita(objFinal)
+    }else{
+      this.toastr.warning('completa la informacion')
+
     }
 
   }
   generatePdf(){
-
+    console.log('entro');
+    
     const documentDefinition = { 
       content: [
         'Esta cotización tiene validez de 3 horas ',
         {
         table: {
-            headerRows: 1,
-            widths: ['*', 'auto', 100, '*'],
             body: [
                 ['NOMBRE PACIENTE', 'APELLIDO PACIENTE', 'DNI','NOMRE DOCTOR', 'VALOR DE CONSULTA'],
                 [this.quoteForm.value.nombre, this.quoteForm.value.apellido,this.quoteForm.value.DNI, this.quoteForm.value.doctor[0].name + ' '+this.quoteForm.value.doctor[0].last, this.quoteForm.value.doctor[0].cost]
