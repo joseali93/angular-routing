@@ -47,6 +47,8 @@ import {
     AngularMultiSelectModule,
     FormsModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(), // ToastrModule added
+
     ToastNoAnimationModule.forRoot(),
   ],
   providers: [],
