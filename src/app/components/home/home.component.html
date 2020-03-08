@@ -1,20 +1,36 @@
 <h1>Agendar cita medica</h1>
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01">Doctores</label>
-    </div>
-    <select class="custom-select" id="inputGroupSelect01">
-      <option selected>Choose...</option>
-      <option *ngFor="let item of doctors" >{{item.name}}</option>
-    
-    </select>
+
+<form [formGroup]="checkForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Especialidad</label>
+    <angular2-multiselect [data]="categories" [(ngModel)]="selectedItems" [settings]="settings"
+      (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"
+      formControlName="categoria">
+    </angular2-multiselect>
   </div>
-    <div class="form-group">
-      <div class="input-group">
-        <input class="form-control" placeholder="yyyy-mm-dd"
-               name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-        </div>
-      </div>
+  <div class="form-group" *ngIf="selectedItems">
+    <label for="name">Doctores</label>
+    <angular2-multiselect [data]="doctors" [(ngModel)]="selectedItems2" [settings]="settings2"
+      (onSelect)="onItemSelect2($event)" (onDeSelectAll)="onDeSelectAll2($event)" formControlName="doctor">
+    </angular2-multiselect>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6" *ngIf="selectedItems2">
+      <label for="name">Dias habiles</label>
+      <select class="custom-select" id="inputGroupSelect01" formControlName="dia">
+        <ng-container *ngFor="let item of selectedItems2">
+          <option *ngFor="let dias of item.dias" [value]="dias">{{days[dias]}}</option>
+        </ng-container>
+      </select>
     </div>
+    <div class="form-group col-md-6" *ngIf="selectedItems2">
+      <label for="name">Horario</label>
+      <select class="custom-select" id="inputGroupSelect02" formControlName="horario">
+        <ng-container *ngFor="let item of selectedItems2">
+          <option *ngFor="let horario of item.horario" [value]="horario">{{horario}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+  <button class="btn btn-primary mr-1 " *ngIf="checkForm.valid">Registrar</button>
+</form>

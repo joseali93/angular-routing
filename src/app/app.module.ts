@@ -15,7 +15,9 @@ import { environment } from "src/environments/environment";
 //angularfire imports
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { DirecticvasDirective } from './directives/directicvas.directive';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,21 @@ import { FormsModule } from '@angular/forms';
     ConsultComponent,
     QuoteComponent,
     RequestComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DirecticvasDirective
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbModule,    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    AngularMultiSelectModule,
+    FormsModule,
+    DirecticvasDirective
   ],
   providers: [],
   bootstrap: [AppComponent]
