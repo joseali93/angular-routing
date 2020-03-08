@@ -1,1 +1,26 @@
-<p>quote works!</p>
+<h3>Cotizaciones!</h3>
+<form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Nombre</label>
+      <input type="text" formControlName="nombre" class="form-control" id="inputEmail4">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Apellido</label>
+      <input type="text" class="form-control" formControlName="apellido" id="inputPassword4">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">DNI</label>
+    <input type="text" class="form-control" id="inputAddress" formControlName="DNI" placeholder="123123123">
+  </div>
+  <div class="form-group">
+    <label for="name">Doctores</label>
+    <angular2-multiselect [data]="doctors" [(ngModel)]="selectedItems" [settings]="settings2"
+      (onSelect)="onItemSelect2($event)" (onDeSelectAll)="onDeSelectAll2($event)" formControlName="doctor">
+    </angular2-multiselect>
+  </div>
+  <button *ngIf="!showCotizacion" type="submit" class="btn btn-primary">Generar cotización</button>
+</form>
+<button class="btn btn-secundary" *ngIf="quoteForm.status=='VALID' && showCotizacion"
+  (click)="generatePdf()">Descargar</button>

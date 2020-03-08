@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { ConsultService } from './../../services/consult.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';

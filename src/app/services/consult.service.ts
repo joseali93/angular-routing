@@ -11,6 +11,32 @@ export class ConsultService {
 
   getDoctors() {
     return this.firestore.collection("doctors").snapshotChanges();
+
+
+  }
+  getDoctors2() {
+    // return this.firestore.collection("doctors").snapshotChanges();
+    var obj = []
+    var reference = this.firestore.collection("doctors").ref;
+    return reference.get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          console.log('No matching documents.');
+          return obj
+
+        }
+        snapshot.forEach(doc => {
+          obj.push(doc.data())
+          // console.log(doc.id, '=>', doc.data());
+        });
+        console.log('obj', obj)
+        return obj
+
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });;
+
   }
   getCategories() {
     return this.firestore.collection("categories").snapshotChanges();

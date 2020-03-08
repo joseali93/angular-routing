@@ -17,8 +17,13 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
-import { DirecticvasDirective } from './directives/directicvas.directive';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+import {
+  ToastrModule,
+  ToastNoAnimation,
+  ToastNoAnimationModule
+} from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,9 +32,10 @@ import { DirecticvasDirective } from './directives/directicvas.directive';
     QuoteComponent,
     RequestComponent,
     PageNotFoundComponent,
-    DirecticvasDirective
+    
   ],
   imports: [
+    MatTableModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -40,7 +46,8 @@ import { DirecticvasDirective } from './directives/directicvas.directive';
     BrowserModule,
     AngularMultiSelectModule,
     FormsModule,
-    DirecticvasDirective
+    BrowserAnimationsModule,
+    ToastNoAnimationModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
